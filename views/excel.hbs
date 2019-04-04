@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.accordion, .accordion:focus {
+  background-color: white;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 14px;
+  transition: 0.4s;
+  font-weight: bold;
+  color: #003359;
+}
+
+.active, .accordion:focus {
+  background-color: #DCD9D9;
+  border-color: transparent;
+  color: #ff0000;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.panel {
+  padding: 0 28px;
+  display: none;
+  background-color: white;
+  overflow: hidden;
+  -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+  border: 1px solid #D7D7D8;
+  align-content: center;
+  font-family:arial;
+  font-size:13px; 
+  
+}
+
+div.panel.show {
+    display: block !important;
+    
+}
+
+.panel p{
+   margin: 5px;
+}
+
+.accordion:after {
+    font-family: 'Glyphicons Halflings';  
+    content: "\e080";    
+    float: left;        
+    color: grey;         
+    padding-right: 10px;
+}
+.accordion.active:after {
+    content: "\e114";    
+}
+
+.add-on .form-control:focus {
+ box-shadow:none;
+ -webkit-box-shadow:none; 
+ border-color:#cccccc; 
+}
+
+.form-control:first-child{
+  width: 20%;
+  float: right;
+}
+.navbar-nav:last-child{ border-right:0}
+</style>
+</head>
+<body>
+
+{{!-- <h2>Excel Data</h2> --}}
+
+<div class="input-group add-on">
+      <input class="form-control" placeholder="Search" name="srch-term" id="srch-term" type="text">
+      <div class="input-group-btn">
+        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+      </div>
+    </div>
+  </form>
+
+ {{#each excel}}
+<button class="accordion" >{{this.A}}</button>
+<div class="panel">
+  <p>{{this.B}}</p>
+</div>
+{{/each}}
+
+
+
+<script>
+
+var acc = document.getElementsByClassName("accordion");
+var panel = document.getElementsByClassName('panel');
+var i;
+
+for (var i = 0; i < acc.length; i++) {
+    acc[i].onclick = function() {
+        var setClasses = !this.classList.contains('active');
+        setClass(acc, 'active', 'remove');
+        setClass(panel, 'show', 'remove');
+
+        if (setClasses) {
+            this.classList.toggle("active");
+            this.nextElementSibling.classList.toggle("show");
+        }
+    }
+}
+
+function setClass(els, className, fnName) {
+    for (var i = 0; i < els.length; i++) {
+        els[i].classList[fnName](className);
+    }
+}
+
+
+</script>
+
+</body>
+</html>
